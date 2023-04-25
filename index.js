@@ -10,6 +10,11 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: 'com.tempreactnativeproj.SplashScreen',
+              options: {
+                topBar: {
+                  visible: false,
+                },
+              },
             },
           },
         ],
