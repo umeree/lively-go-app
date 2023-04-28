@@ -13,13 +13,18 @@ import Button from '../components/Button';
 import {API_URL} from '../../API_URL';
 import {theme} from '../Theme/Theme';
 import {ActivityIndicator} from 'react-native-paper';
-import {serachUsers} from '../../client/requests';
+import {followUser, serachUsers} from '../../client/requests';
+import {useUserDataHandler} from '../../context/UserInfoContext';
+import Toast from 'react-native-toast-message';
 
 const FriendScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+
+  // ** global user state
+  const {userData} = useUserDataHandler();
 
   function handleSearch() {
     setSearchResult(null);
@@ -33,6 +38,26 @@ const FriendScreen = () => {
         setLoading(false);
       }
     });
+  }
+
+  function handleAddFriend(friendsId, user_name) {
+    if (userData.user_id == friendsId) {
+      Toast.show({
+        type: 'error',
+        text1: 'Following',
+        text2: `You can not follow yourself!`,
+      });
+    } else {
+      followUser(userData.user_id, friendsId).then(res => {
+        if (!res.error) {
+          Toast.show({
+            type: 'success',
+            text1: 'Following',
+            text2: `${user_name} sucessfully added to your followings!`,
+          });
+        }
+      });
+    }
   }
 
   return (
@@ -139,7 +164,10 @@ const FriendScreen = () => {
                       padding: 8,
                       backgroundColor: theme.colors.secondary,
                       borderRadius: 5,
-                    }}>
+                    }}
+                    onPress={() =>
+                      handleAddFriend(user.user_id, user.user_name)
+                    }>
                     <Text style={{color: 'white'}}>Follow</Text>
                   </Pressable>
                 </View>

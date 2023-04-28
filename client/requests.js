@@ -120,3 +120,21 @@ export async function serachUsers(username) {
       return {error: error.data};
     });
 }
+
+//follow users
+export async function followUser(userId, followersId) {
+  var config = {
+    method: 'post',
+    url: `${API_URL}/api/v1/follow_user?userId=${userId}&followersId=${followersId}`,
+  };
+
+  return axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return {error: error.data};
+    });
+}
