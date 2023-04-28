@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^6.3.16",
     "agora-react-native-rtm": "^1.5.1",
     "agora-rn-uikit": "^5.0.1",
+    "axios": "^1.4.0",
     "body-parser": "^1.20.1",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",

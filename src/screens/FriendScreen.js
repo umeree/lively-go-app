@@ -6,47 +6,34 @@ import {
   Text,
   Image,
   Pressable,
+  ScrollView,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Button from '../components/Button';
 import {API_URL} from '../../API_URL';
 import {theme} from '../Theme/Theme';
+import {ActivityIndicator} from 'react-native-paper';
+import {serachUsers} from '../../client/requests';
 
 const FriendScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
-  const api_call = () => {
-    console.log(API_URL);
-    fetch(`${API_URL}/api/v1/all_users`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(async res => {
-        try {
-          // console.log(res);
-          const jsonRes = await res.json();
-          if (res.status !== 200) {
-            // setIsError(true);
-            // setMessage(jsonRes.message);
-          } else {
-            console.log(jsonRes);
-            setData(jsonRes.users);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    api_call();
-  }, []);
+  function handleSearch() {
+    setSearchResult(null);
+    setLoading(true);
+    serachUsers(searchTerm).then(res => {
+      if (!res.error) {
+        setSearchResult(res.users);
+        setLoading(false);
+      } else {
+        setSearchResult(false);
+        setLoading(false);
+      }
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -75,6 +62,7 @@ const FriendScreen = () => {
             style={{marginRight: 10}}
           />
           <TextInput
+            returnKeyType="done"
             style={styles.input}
             placeholder="Search"
             onChangeText={newSearchTerm => setSearchTerm(newSearchTerm)}
@@ -86,29 +74,79 @@ const FriendScreen = () => {
               backgroundColor: theme.colors.secondary,
               color: 'white',
               borderRadius: 10,
-            }}>
-            <Text>Search</Text>
+            }}
+            onPress={() => handleSearch()}>
+            <Text style={{color: 'white'}}>Search</Text>
           </Pressable>
         </View>
       </View>
-      {/* Friend list section */}
-      <View>
-        {data?.map((contact, index) => (
-          <View key={index} style={styles.row}>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-              <Image
-                source={require('../assets/me.png')}
-                style={styles.image}
-              />
-              <Text style={styles.text}>
-                {contact.first_name} {contact.last_name}
-              </Text>
-            </View>
-            <Pressable>
-              <Text>Follow</Text>
-            </Pressable>
+      <View style={{marginTop: 15, width: '100%'}}>
+        {/* Friend list section */}
+        {loading ? (
+          <ActivityIndicator
+            size="large"
+            color={theme.colors.secondary}
+            style={{marginTop: '25%'}}
+          />
+        ) : (
+          ''
+        )}
+        {searchResult == null && loading == false ? (
+          <View style={{marginTop: 50}}>
+            <Text
+              style={{
+                fontSize: 22,
+                color: 'black',
+                textAlign: 'center',
+                opacity: 0.5,
+              }}>
+              Nothing to show, kindly search something!
+            </Text>
           </View>
-        ))}
+        ) : (
+          <ScrollView
+            style={{
+              width: '100%',
+              paddingHorizontal: 20,
+            }}>
+            <View style={{marginBottom: 10}}>
+              <Text style={{fontSize: 16}}>Search Results</Text>
+            </View>
+            {searchResult?.map((user, index) => {
+              return (
+                <View key={index} style={styles.row}>
+                  <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <Image
+                      source={require('../assets/me.png')}
+                      style={styles.image}
+                    />
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        marginLeft: 5,
+                      }}>
+                      <Text style={styles.text}>
+                        {user.first_name} {user.last_name}
+                      </Text>
+                      <Text style={{opacity: 0.8, fontSize: 16}}>
+                        @{user.user_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <Pressable
+                    style={{
+                      padding: 8,
+                      backgroundColor: theme.colors.secondary,
+                      borderRadius: 5,
+                    }}>
+                    <Text style={{color: 'white'}}>Follow</Text>
+                  </Pressable>
+                </View>
+              );
+            })}
+          </ScrollView>
+        )}
       </View>
     </View>
   );
@@ -137,26 +175,22 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   row: {
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingVertical: 20,
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 20,
     alignItems: 'center',
-    marginLeft: 70,
     justifyContent: 'space-between',
-    width: '80%',
+    width: '100%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginVertical: 5,
   },
   text: {
     color: 'black',
     fontSize: 18,
-    marginLeft: 5,
-  },
-  starredIcon: {
-    width: 55,
-    height: 55,
-    backgroundColor: '#333333',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
   },
   image: {
     width: 55,
