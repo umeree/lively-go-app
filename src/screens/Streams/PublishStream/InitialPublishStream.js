@@ -63,6 +63,8 @@ export default function InitialPublishStream({navigation}) {
               status: res.status,
               userName: userName,
               liveId: res.liveId,
+              ownerId: res.ownerId, //owner of the stream
+              userId: userId, // current user
             });
           } else {
             showErrorToast();

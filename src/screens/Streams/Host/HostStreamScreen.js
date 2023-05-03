@@ -6,11 +6,12 @@ import 'react-native-get-random-values';
 
 export default function HostStreamScreen({navigation, route}) {
   //** Fetch params from navigation */
-  const {name, streamId, status, userName, liveId, userId} = route.params;
+  const {name, streamId, status, userName, liveId, userId, ownerId} =
+    route.params;
   const APP_ID = 845259951;
   const APP_SIGNIN =
     '2301d5bd06367344f2003efba05cbc27457df8be4a583ae7419541bc3f33b95b';
-  const USER_ID = toString(userId);
+  const USER_ID = userId.toString();
   const USERNAME = userName;
   const LIVE_ID = liveId;
 
@@ -25,6 +26,8 @@ export default function HostStreamScreen({navigation, route}) {
             USERNAME={USERNAME}
             USER_ID={USER_ID}
             LIVE_ID={LIVE_ID}
+            STREAM_ID={streamId}
+            OWNER_ID={ownerId.toString()}
           />
         </View>
       </SafeAreaView>

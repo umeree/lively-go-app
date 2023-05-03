@@ -156,3 +156,21 @@ export async function CreateStream(name, description, liveId, userId) {
       return {error: error.data};
     });
 }
+
+//update stream
+export async function UpdateStream(streamId, status) {
+  var config = {
+    method: 'post',
+    url: `${API_URL}/api/v1/update_stream?streamId=${streamId}&status=${status}`,
+  };
+
+  return axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return {error: error.data};
+    });
+}
