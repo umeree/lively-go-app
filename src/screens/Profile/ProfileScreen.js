@@ -7,7 +7,8 @@ import {useUserDataHandler} from '../../../context/UserInfoContext';
 import {Pressable} from 'react-native';
 
 const ProfileScreen = ({navigation}) => {
-  const {userData, followers, followings, ClearStates} = useUserDataHandler();
+  const {userData, followers, followings, streams, ClearStates} =
+    useUserDataHandler();
 
   const showSuccessToast = () => {
     Toast.show({
@@ -84,6 +85,19 @@ const ProfileScreen = ({navigation}) => {
             {followers?.length}
           </Text>
           <Text style={{color: 'black', fontSize: 18}}>Followers</Text>
+        </Pressable>
+        <View style={{width: 2, height: 50, backgroundColor: 'gray'}}></View>
+        <Pressable
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 32, fontWeight: '900', color: 'black'}}>
+            {streams?.length}
+          </Text>
+          <Text style={{color: 'black', fontSize: 18}}>Streams</Text>
         </Pressable>
       </View>
       {/* <Pressable

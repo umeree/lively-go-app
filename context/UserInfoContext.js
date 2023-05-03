@@ -5,6 +5,7 @@ const UserDataContext = createContext({
   userData: null,
   followings: null,
   followers: null,
+  streams: null,
   fetchUserData: () => {},
   setUserData: () => {},
   ClearStates: () => {},
@@ -15,6 +16,7 @@ export const UserDataContextProvider = ({children}) => {
   const [userData, setUserData] = useState(null);
   const [followings, setFollowings] = useState(null);
   const [followers, setFollowers] = useState(null);
+  const [streams, setStreams] = useState(null);
 
   async function fetchUserData(id) {
     const res = await getUserInformation(id).then(res => {
@@ -22,6 +24,7 @@ export const UserDataContextProvider = ({children}) => {
       setUserData(res.data.user);
       setFollowers(res.data.followers);
       setFollowings(res.data.followings);
+      setStreams(res.data.streams);
       return res;
     });
   }
@@ -30,6 +33,7 @@ export const UserDataContextProvider = ({children}) => {
     setUserData(null);
     setFollowers(null);
     setFollowings(null);
+    setStreams(null);
   }
 
   return (
@@ -41,6 +45,7 @@ export const UserDataContextProvider = ({children}) => {
         followings,
         followers,
         ClearStates,
+        streams,
       }}>
       {children}
     </UserDataContext.Provider>
