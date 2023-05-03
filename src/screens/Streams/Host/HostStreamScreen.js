@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import HostComponent from './Components.js/Host';
+import HostComponent from './Components/Host';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
@@ -16,7 +16,7 @@ export default function HostStreamScreem({navigation}) {
   return (
     <>
       <SafeAreaView>
-        <View>
+        <View style={{height: '100%', width: '100%'}}>
           <HostComponent
             navigation={navigation}
             APP_ID={APP_ID}
