@@ -24,7 +24,7 @@ const FriendScreen = () => {
   const [data, setData] = useState([]);
 
   // ** global user state
-  const {userData} = useUserDataHandler();
+  const {userData, fetchUserData} = useUserDataHandler();
 
   function handleSearch() {
     setSearchResult(null);
@@ -55,6 +55,7 @@ const FriendScreen = () => {
             text1: 'Following',
             text2: `${user_name} sucessfully added to your followings!`,
           });
+          fetchUserData(userData.user_id);
         }
       });
     }
