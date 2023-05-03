@@ -24,6 +24,7 @@ import {ExploreFriends} from './src/screens/Explore/ExploreFriends';
 import InitialPublishStream from './src/screens/Streams/PublishStream/InitialPublishStream';
 import AllStreams from './src/screens/Streams/AllStreams';
 import HostStreamScreem from './src/screens/Streams/Host/HostStreamScreen';
+import PaymentSceen from './src/screens/PaymentScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -94,6 +95,7 @@ export default function App() {
               <Stack.Screen name="SplashScreen" component={SplashScreen} />
               <Stack.Screen name="LoginScreen" component={LoginScreen} />
               <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+              <Stack.Screen name="PaymentScreen" component={PaymentSceen} />
               <Stack.Screen name="Tabs" component={MyTabs} />
               <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
               <Stack.Screen name="FollowersScreen" component={Followers} />

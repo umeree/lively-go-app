@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+mport React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
-import { theme } from "../Theme/Theme";
+import { theme } from "../Theme/Theme";i
 import { emailValidator } from "../Validators/emailValidator";
 import { passwordValidator } from "../Validators/passwordValidator";
 import {
@@ -57,7 +57,7 @@ export default function RegisterScreen({ navigation }) {
             showSuccessToast();
             navigation.reset({
               index: 0,
-              routes: [{ name: "LoginScreen" }],
+              routes: [{ name: "PaymentScreen" }],
             });
           }
         }else{
