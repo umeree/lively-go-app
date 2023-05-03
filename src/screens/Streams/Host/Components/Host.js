@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
-import AgoraUIKit from 'agora-rn-uikit';
-import {Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import ZegoUIKitPrebuiltLiveStreaming, {
+  HOST_DEFAULT_CONFIG,
+} from '@zegocloud/zego-uikit-prebuilt-live-streaming-rn';
 
-const HostComponent = () => {
-  const [videoCall, setVideoCall] = useState(true);
-  const connectionData = {
-    appId: '955fcded0fd1479a805276c006f36a23',
-    channel: 'munyyb',
-  };
-  const callbacks = {
-    EndCall: () => setVideoCall(false),
-  };
-  return videoCall ? (
-    <AgoraUIKit
-      connectionData={connectionData}
-      rtcCallbacks={callbacks}
-      style={{height: '100%', width: '100%'}}
-    />
-  ) : (
-    <Text onPress={() => setVideoCall(true)}>Start Call</Text>
+export default function HostPage(props) {
+  return (
+    <View style={{height: '100%', width: '100%'}}>
+      <ZegoUIKitPrebuiltLiveStreaming
+        appID={props.APP_ID}
+        appSign={props.APP_SIGNIN}
+        userID={props.USER_ID}
+        userName={props.USERNAME}
+        liveID={props.LIVE_ID}
+        config={{
+          ...HOST_DEFAULT_CONFIG,
+          onLeaveLiveStreaming: () => {
+            props.navigation.navigate('Tabs');
+          },
+        }}
+      />
+    </View>
   );
-};
-
-export default HostComponent;
+}
