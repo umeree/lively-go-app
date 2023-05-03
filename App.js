@@ -23,7 +23,7 @@ import {UserDataContextProvider} from './context/UserInfoContext';
 import {ExploreFriends} from './src/screens/Explore/ExploreFriends';
 import InitialPublishStream from './src/screens/Streams/PublishStream/InitialPublishStream';
 import AllStreams from './src/screens/Streams/AllStreams';
-import HostStreamScreem from './src/screens/Streams/Host/HostStreamScreen';
+import HostStreamScreen from './src/screens/Streams/Host/HostStreamScreen';
 import PaymentSceen from './src/screens/PaymentScreen';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -108,7 +108,7 @@ export default function App() {
               <Stack.Screen name="AllStreamsScreen" component={AllStreams} />
               <Stack.Screen
                 name="HostStreamScreen"
-                component={HostStreamScreem}
+                component={HostStreamScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

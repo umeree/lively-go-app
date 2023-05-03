@@ -138,3 +138,21 @@ export async function followUser(userId, followersId) {
       return {error: error.data};
     });
 }
+
+//create stream
+export async function CreateStream(name, description, liveId, userId) {
+  var config = {
+    method: 'post',
+    url: `${API_URL}/api/v1/create_stream?name=${name}&description=${description}&liveId=${liveId}&userId=${userId}`,
+  };
+
+  return axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return {error: error.data};
+    });
+}

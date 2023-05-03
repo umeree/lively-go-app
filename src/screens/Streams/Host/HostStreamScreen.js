@@ -3,15 +3,16 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import HostComponent from './Components/Host';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
 
-export default function HostStreamScreem({navigation}) {
+export default function HostStreamScreen({navigation, route}) {
+  //** Fetch params from navigation */
+  const {name, streamId, status, userName, liveId, userId} = route.params;
   const APP_ID = 845259951;
   const APP_SIGNIN =
     '2301d5bd06367344f2003efba05cbc27457df8be4a583ae7419541bc3f33b95b';
-  const USER_ID = uuidv4();
-  const USERNAME = 'Muneeb';
-  const LIVE_ID = uuidv4();
+  const USER_ID = toString(userId);
+  const USERNAME = userName;
+  const LIVE_ID = liveId;
 
   return (
     <>

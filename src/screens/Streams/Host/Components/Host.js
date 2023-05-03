@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import ZegoUIKitPrebuiltLiveStreaming, {
   HOST_DEFAULT_CONFIG,
+  ZegoMenuBarButtonName,
 } from '@zegocloud/zego-uikit-prebuilt-live-streaming-rn';
 
 export default function HostPage(props) {
@@ -18,6 +19,8 @@ export default function HostPage(props) {
           onLeaveLiveStreaming: () => {
             props.navigation.navigate('Tabs');
           },
+          turnOnCameraWhenJoining: false, // Modify your custom configurations here.
+          turnOnMicrophoneWhenJoining: true, // Modify your custom configurations here.
         }}
       />
     </View>
