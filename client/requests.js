@@ -55,6 +55,13 @@ export async function Register(data) {
   });
 }
 
+//Get All users
+
+// fetch(`${API_URL}/api/v1/all_users`)
+//   .then(res => console.log(res))
+
+//UserInformations
+
 export async function getUserInformation(id) {
   return await fetch(`${API_URL}/api/v1/userinformation?id=${id}`, {
     method: 'GET',

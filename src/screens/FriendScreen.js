@@ -40,6 +40,17 @@ const FriendScreen = () => {
     });
   }
 
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(`${API_URL}/api/v1/all_users/data`);
+  //     const jsonData = await response.json();
+  //     setData(jsonData);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  // fetchData();
+
   function handleAddFriend(friendsId, user_name) {
     if (userData.user_id == friendsId) {
       Toast.show({
@@ -119,15 +130,17 @@ const FriendScreen = () => {
         )}
         {searchResult == null && loading == false ? (
           <View style={{marginTop: 50}}>
-            <Text
+            {/* <Text
               style={{
                 fontSize: 22,
                 color: 'black',
                 textAlign: 'center',
                 opacity: 0.5,
               }}>
-              Nothing to show, kindly search something!
-            </Text>
+              Nothing to show, kindly search something! plzz
+            </Text> */}
+
+            <Text>{data}</Text>
           </View>
         ) : (
           <ScrollView

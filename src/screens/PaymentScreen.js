@@ -9,7 +9,7 @@ import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
 import { theme } from "../Theme/Theme";
 
-export default function PaymentSceen(){
+export default function PaymentSceen({navigation}){
     return (
         <Background>
         <BackButton />
