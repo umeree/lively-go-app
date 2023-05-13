@@ -52,7 +52,7 @@ const MyTabs = () => {
         options={{
           tabBarLabel: 'Explore',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="compass" color={color} size={26} />
           ),
         }}
       />

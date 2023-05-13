@@ -24,12 +24,17 @@ export default function Dashboard({navigation}) {
             style={styles.screens}>
             <Text style={styles.text}>Followers List</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.screens}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('FollowingScreen')}
+            style={styles.screens}>
+            <Text style={styles.text}>Following List</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity style={styles.screens}>
             <Text style={styles.text}>Stats</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.screens}>
+          </TouchableOpacity> */}
+          {/* <TouchableOpacity style={styles.screens}>
             <Text style={styles.text}>Contacts</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </SafeAreaView>
       <Pressable
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     width: 300,
     marginBottom: 20,
-    height: 50,
+    height: 100,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

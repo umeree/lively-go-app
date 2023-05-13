@@ -30,8 +30,8 @@ export default function PaymentSceen({navigation}){
         //   error={!!lastName.error}
         //   errorText={lastName.error}
         />
-        <View style = {{display: 'flex', flexDirection: 'row'}}>
-        <TextInput
+        <View style = {{display: 'flex', flexDirection: 'row',width: "100%", justifyContent: "space-between"}}>
+        <TextInput style = {{width: "50%"}}
           label="Expiry Date"
           returnKeyType="next"
         //   value={email.value}
@@ -43,7 +43,7 @@ export default function PaymentSceen({navigation}){
           textContentType="emailAddress"
           keyboardType="email-address"
         />
-        <TextInput
+        <TextInput style = {{width: "50%", marginLeft: "-50%"}}
           label="CVV"
           returnKeyType="done"
         //   value={password.value}
@@ -58,14 +58,14 @@ export default function PaymentSceen({navigation}){
         //   onPress={onSignUpPressed}
           style={{ marginTop: 24 }}
         >
-          Sign Up
+          Pay
         </Button>
-        <View style={styles.row}>
+        {/* <View style={styles.row}>
           <Text>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.replace("LoginScreen")}>
             <Text style={styles.link}>Login</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </Background>
     )
 }

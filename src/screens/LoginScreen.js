@@ -98,7 +98,7 @@ export default function LoginScreen({navigation}) {
       <Button mode="contained" onPress={onLoginPressed}>
         Login
       </Button>
-      <Button onPress={() => navigation.navigate('PaymentScreen')}>Payment</Button>
+      {/* <Button onPress={() => navigation.navigate('PaymentScreen')}>Payment</Button> */}
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>

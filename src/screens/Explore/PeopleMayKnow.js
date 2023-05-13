@@ -1,10 +1,24 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { StyleSheet, View, Text, Button, Pressable } from "react-native";
 import { ScrollView } from "react-native";
 import { Image } from "react-native";
 import { theme } from "../../Theme/Theme";
+import { GetAllUsers } from "../../../client/requests";
 
 export const PeopleMayKnow = ({ navigation }) => {
+
+  // const {userData, fetchUserData} = useUserDataHandler();
+  const [users, setUsers]  = useState([])
+
+  useEffect(()=>{
+    GetAllUsers().then((res)=>{
+      console.log(res)
+      if(res){
+        setUsers(res.users)
+      }
+    })
+  }, [])
+
   const ProfData = [
     {
       key: "1",
@@ -37,6 +51,27 @@ export const PeopleMayKnow = ({ navigation }) => {
       subtitle: "example subtitle 3",
     },
   ];
+
+  function handleAddFriend(friendsId, user_name) {
+    if (userData.user_id == friendsId) {
+      Toast.show({
+        type: 'error',
+        text1: 'Following',
+        text2: `You can not follow yourself!`,
+      });
+    } else {
+      followUser(userData.user_id, friendsId).then(res => {
+        if (!res.error) {
+          Toast.show({
+            type: 'success',
+            text1: 'Following',
+            text2: `${user_name} sucessfully added to your followings!`,
+          });
+          fetchUserData(userData.user_id);
+        }
+      });
+    }
+  }
   return (
     <>
       <View style={styles.container}>
@@ -45,29 +80,29 @@ export const PeopleMayKnow = ({ navigation }) => {
         </View>
 
         <ScrollView style={styles.lowerContainer}>
-          {ProfData.map((element) => {
+          {users.map((element) => {
             return (
-              <View
+              <View 
                 style={styles.innerContentofLowerContainer}
                 key={element.key}
               >
                 <View style={styles.innerContentofLowerContainerDiv}>
                   <View>
                     <Image
-                      source={element.photo}
+                      source={require("../../assets/prof.jpeg")}
                       style={styles.photoFindFriend}
                     />
                   </View>
 
                   <View
                     style={styles.textContainerLower}
-                    onPress={() => navigation.navigate("UserProfileScreen")}
+                    
                   >
-                    <Text style={{ textAlign: "center" }}>
-                      {element.subtitle}
+                    <Text style={{ textAlign: "center", fontWeight: "900" }} onPress={() => navigation.navigate("UserProfileScreen")}>
+                      {element.first_name}
                     </Text>
-                    <Text style={{ textAlign: "center" }}>{element.title}</Text>
-                    <Pressable style={styles.button}>
+                    <Text style={{ textAlign: "center" }}>{element.last_name}</Text>
+                    <Pressable style={styles.button} >
                       <Text>Follow</Text>
                     </Pressable>
                   </View>

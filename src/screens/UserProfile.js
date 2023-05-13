@@ -2,6 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useUserDataHandler } from "../../context/UserInfoContext";
+import {getUserInformation} from '../client/requests';
+
+
+
 
 function UserProfile({ navigation }) {
   const { userData } = useUserDataHandler();
@@ -15,6 +19,20 @@ function UserProfile({ navigation }) {
       desc: "Im still not sure what you mean by . Can you please provide more context or clarify your question?",
     },
   ];
+
+  // async function fetchUserData(id) {
+  //   const res = await getUserInformation(id).then(res => {
+  //      console.log(res.data);
+  //     return res;
+  //   });
+  // }
+  // const [data, setData]  = useState([])
+
+  // useEffect(()=>{
+  //   fetchUserData()
+  // }, [])
+
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -58,13 +76,13 @@ function UserProfile({ navigation }) {
         </View>
         <View style={styles.followers} style={{ marginLeft: 10 }}>
           <Text
-            onPress={() => navigation.navigate("Followers")}
+            onPress={() => navigation.navigate("FollowersScreen")}
             style={{ fontSize: 15, textAlign: "center", color: "#52a0c6" }}
           >
             500
           </Text>
           <Text
-            onPress={() => navigation.navigate("Followers")}
+            onPress={() => navigation.navigate("FollowersScreen")}
             style={{ fontSize: 13, textAlign: "center", color: "#52a0c6" }}
           >
             FoLLOWERS
@@ -72,13 +90,13 @@ function UserProfile({ navigation }) {
         </View>
         <View style={styles.following}>
           <Text
-            onPress={() => navigation.navigate("Following")}
+            onPress={() => navigation.navigate("FollowingScreen")}
             style={{ fontSize: 15, textAlign: "center", color: "#52a0c6" }}
           >
             1000
           </Text>
           <Text
-            onPress={() => navigation.navigate("Following")}
+            onPress={() => navigation.navigate("FollowingScreen")}
             style={{ fontSize: 13, textAlign: "center", color: "#52a0c6" }}
           >
             FOLLOWING
@@ -139,12 +157,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 280,
     height: 45,
+    // marginLeft: 1000,
     // backgroundColor : "#52a0c6",
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
     marginTop: 25,
-    marginLeft: 40,
+    marginLeft: "15%",
     borderRadius: 40,
     borderColor: "#52a0c6",
     borderWidth: 1,

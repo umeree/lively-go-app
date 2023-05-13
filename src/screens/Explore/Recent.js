@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { StyleSheet, View, Text, Button, Pressable } from "react-native";
 import { ScrollView } from "react-native";
 import { Image } from "react-native";
+import { GetAllStreams } from "../../../client/requests";
 
 export const RecentFriends = ({ navigation }) => {
   const ProfData = [
@@ -36,6 +37,17 @@ export const RecentFriends = ({ navigation }) => {
       subtitle: "example subtitle 3",
     },
   ];
+
+  const [users, setUsers]  = useState([])
+
+  useEffect(()=>{
+    GetAllStreams().then((res)=>{
+      console.log(res)
+      if(res){
+        setUsers(res.users)
+      }
+    })
+  }, [])
   return (
     <>
       <View style={styles.container}>
@@ -48,18 +60,19 @@ export const RecentFriends = ({ navigation }) => {
           </Text>
         </View>
         <ScrollView style={styles.upperContainer}>
-          {ProfData.map((element) => {
+          {users.map((element) => {
             return (
               <View
                 style={styles.innerContentofUpperContainer}
-                key={element.key}
+                key={element.id}
               >
-                <Image source={element.photo} style={styles.photo} />
+                <Image source={require("../../assets/prof.jpeg")} style={styles.photo} />
                 <View style={styles.textContainer}>
                   <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                    {element.subtitle}
+                    {element.name}
                   </Text>
-                  <Text>{element.title}</Text>
+                  <Text>{element.description}</Text>
+                  <Text style = {{color: "red"}}>{element.status}</Text>
                 </View>
               </View>
             );

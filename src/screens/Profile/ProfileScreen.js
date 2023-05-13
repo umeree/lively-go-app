@@ -118,6 +118,15 @@ const ProfileScreen = ({navigation}) => {
         }}>
         <Text style={styles.text}>Broadcast</Text>
       </Pressable>
+      <Pressable
+        style={{
+          backgroundColor: 'white',
+          width: '100%',
+          padding: 10,
+          marginVertical: 5,
+        }} onPress={() => navigation.navigate('PaymentScreen')}>
+        <Text style={styles.text}>Buy Super Hearts ❤️</Text>
+      </Pressable>
       {/* <Pressable
         style={{
           backgroundColor: 'white',

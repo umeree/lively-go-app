@@ -57,7 +57,7 @@ export default function RegisterScreen({navigation}) {
             showSuccessToast();
             navigation.reset({
               index: 0,
-              routes: [{name: 'PaymentScreen'}],
+              routes: [{name: 'LoginScreen'}],
             });
           }
         } else {

@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { theme } from "../../../Theme/Theme";
+import { GetAllStreams } from "../../../../client/requests";
 
-export default function StreamContainer({
-  name = "Channel Name",
-  description = "Channal Descrption",
-  date = "April 17, 2023",
-}) {
+export default function StreamContainer() {
+  const [users, setUsers]  = useState([])
+
+  useEffect(()=>{
+    GetAllStreams().then((res)=>{
+      console.log(res)
+      if(res){
+        setUsers(res.users)
+      }
+    })
+  }, [])
+
+  return <>
+  {users.map((element, index) => {
   return (
     <View
+    key = {element.id + index}
       style={{
         marginVertical: 10,
         padding: 10,
@@ -47,14 +58,15 @@ export default function StreamContainer({
               flexDirection: "column",
             }}
           >
-            <Text>{name}</Text>
-            <Text>{description}</Text>
+            <Text>{element.name}</Text>
+            <Text>{element.description}</Text>
           </View>
         </View>
         <View>
-          <Text>{date}</Text>
+          {/* <Text>{date}</Text> */}
         </View>
       </View>
     </View>
-  );
+  );})}
+  </>
 }

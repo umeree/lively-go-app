@@ -14,13 +14,8 @@ export default function AllStreams({ navigation }) {
         }}
       >
         <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
-        <StreamContainer />
+      
+        
       </ScrollView>
     </>
   );
