@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import HostComponent from './Components/Host';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import 'react-native-get-random-values';
+import FollowBtn from '../../../components/FollowBtn';
+import SendHeartsBtn from '../../../components/SendHeartsBtn';
 
 export default function HostStreamScreen({navigation, route}) {
   //** Fetch params from navigation */
@@ -18,7 +20,11 @@ export default function HostStreamScreen({navigation, route}) {
   return (
     <>
       <SafeAreaView>
-        <View style={{height: '100%', width: '100%'}}>
+        <View style={{height: '100%', width: '100%', position: 'relative'}}>
+          <View
+            style={{position: 'absolute', right: 10, top: 350, zIndex: 1000}}>
+            <SendHeartsBtn />
+          </View>
           <HostComponent
             navigation={navigation}
             APP_ID={APP_ID}
