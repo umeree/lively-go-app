@@ -232,3 +232,20 @@ export async function setHearts(userId) {
       return {error: error.data};
     });
 }
+
+export async function sendHearts(userId, ownerId, hearts) {
+  var config = {
+    method: 'post',
+    url: `${API_URL}/api/v1/send_hearts?userId=${userId}&ownerId=${ownerId}&hearts=${hearts}`,
+  };
+
+  return axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return {error: error};
+    });
+}

@@ -5,13 +5,46 @@ import {Pressable, Modal} from 'react-native';
 import {Text} from 'react-native';
 import {useUserDataHandler} from '../../context/UserInfoContext';
 import {theme} from '../Theme/Theme';
+import Toast from 'react-native-toast-message';
+import {ActivityIndicator} from 'react-native-paper';
+import {sendHearts} from '../../client/requests';
 
-export default function SendHeartsBtn({name, streamOwnerId}) {
+export default function SendHeartsBtn({ownerId}) {
   //** States */
   const [sendModel, setSendModel] = useState(false);
   const [loading, setLoading] = useState(false);
   // ** global user state
   const {userData, fetchUserData} = useUserDataHandler();
+  function handleSendHearts(hearts) {
+    if (hearts <= parseInt(userData.hearts)) {
+      sendHearts(userData.user_id, ownerId, hearts).then(res => {
+        console.log(res);
+        if (!res.error) {
+          Toast.show({
+            type: 'success',
+            text1: 'Hearts',
+            text2: `Hearts send successfully!`,
+          });
+          fetchUserData(userData.user_id);
+          setSendModel(!sendModel);
+        } else {
+          setSendModel(!sendModel);
+          Toast.show({
+            type: 'error',
+            text1: 'Hearts',
+            text2: `Failed to send hearts, please try again later!`,
+          });
+        }
+      });
+    } else {
+      setSendModel(!sendModel);
+      Toast.show({
+        type: 'error',
+        text1: 'Hearts',
+        text2: `You do not have enough hearts! Pleas go into profile and buy a packga of 1000 hearts.`,
+      });
+    }
+  }
   return (
     <>
       {sendModel ? (
@@ -56,7 +89,8 @@ export default function SendHeartsBtn({name, streamOwnerId}) {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-              }}>
+              }}
+              onPress={() => handleSendHearts(50)}>
               <Text style={{fontSize: 16}}>❤️ Send 50 Hearts</Text>
             </Pressable>
             <Pressable
@@ -72,7 +106,8 @@ export default function SendHeartsBtn({name, streamOwnerId}) {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-              }}>
+              }}
+              onPress={() => handleSendHearts(100)}>
               <Text style={{fontSize: 16}}>❤️ Send 100 Hearts</Text>
             </Pressable>
             <Pressable
@@ -88,7 +123,9 @@ export default function SendHeartsBtn({name, streamOwnerId}) {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-              }}>
+              }}
+              onPress={() => handleSendHearts(500)}
+              s>
               <Text style={{fontSize: 16}}>❤️ Send 500 Hearts</Text>
             </Pressable>
           </View>

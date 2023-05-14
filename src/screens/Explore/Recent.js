@@ -21,6 +21,7 @@ export const RecentFriends = ({navigation}) => {
       userName: userData.user_name,
       liveId: element.liveId,
       userId: userData.user_id, // current user
+      ownerId: element.userId, //stream owner
     });
   }
 

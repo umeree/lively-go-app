@@ -23,7 +23,7 @@ export default function HostStreamScreen({navigation, route}) {
         <View style={{height: '100%', width: '100%', position: 'relative'}}>
           <View
             style={{position: 'absolute', right: 10, top: 350, zIndex: 1000}}>
-            <SendHeartsBtn />
+            <SendHeartsBtn ownerId={ownerId} />
           </View>
           <HostComponent
             navigation={navigation}
