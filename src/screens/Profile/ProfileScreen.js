@@ -100,15 +100,20 @@ const ProfileScreen = ({navigation}) => {
           <Text style={{color: 'black', fontSize: 18}}>Streams</Text>
         </Pressable>
       </View>
-      {/* <Pressable
+      <View
         style={{
           backgroundColor: 'white',
           width: '100%',
           padding: 10,
           marginVertical: 5,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}>
-        <Text style={styles.text}>Friends</Text>
-      </Pressable> */}
+        <Text style={styles.text}>Available hearts:</Text>
+        <Text style={{fontSize: 18}}>{userData?.hearts}</Text>
+      </View>
       <Pressable
         style={{
           backgroundColor: 'white',
@@ -124,7 +129,8 @@ const ProfileScreen = ({navigation}) => {
           width: '100%',
           padding: 10,
           marginVertical: 5,
-        }} onPress={() => navigation.navigate('PaymentScreen')}>
+        }}
+        onPress={() => navigation.navigate('PaymentScreen')}>
         <Text style={styles.text}>Buy Super Hearts ❤️</Text>
       </Pressable>
       {/* <Pressable
