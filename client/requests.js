@@ -215,3 +215,20 @@ export async function GetAllUsers() {
       return {error: error.data};
     });
 }
+
+export async function setHearts(userId) {
+  var config = {
+    method: 'get',
+    url: `${API_URL}/api/v1/set-hearts?userId=` + userId,
+  };
+
+  return axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return {error: error.data};
+    });
+}
