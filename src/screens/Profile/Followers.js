@@ -1,10 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, ScrollView, Button} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import BackButton from '../../components/BackButton';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {theme} from '../../Theme/Theme';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {useUserDataHandler} from '../../../context/UserInfoContext';
 import ScreenHeader from '../../components/Header/ScreenHeader';
 import FollowBtn from '../../components/FollowBtn';
@@ -27,7 +23,9 @@ function Followers({navigation}) {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontSize: 22}}>No followers!</Text>
+                <Text style={{fontSize: 22, color: 'black'}}>
+                  No followers!
+                </Text>
               </View>
             ) : (
               <></>
@@ -100,6 +98,7 @@ const styles = StyleSheet.create({
   dataText: {
     fontSize: 20,
     marginLeft: 10,
+    color: 'black',
     // paddingRight: 25,
   },
 });

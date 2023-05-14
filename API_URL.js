@@ -1,3 +1,3 @@
-const uri = 'http://13.127.232.204:4001';
+const uri = 'http://192.168.10.23:4001';
 
 export const API_URL = uri;

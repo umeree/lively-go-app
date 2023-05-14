@@ -1,63 +1,46 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useUserDataHandler } from "../../context/UserInfoContext";
+import React from 'react';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useUserDataHandler} from '../../context/UserInfoContext';
 import {getUserInformation} from '../client/requests';
 
-
-
-
-function UserProfile({ navigation }) {
-  const { userData } = useUserDataHandler();
+function UserProfile({navigation}) {
+  const {userData} = useUserDataHandler();
   const ProfData = [
     {
-      key: "1",
-      photo: require("../assets/prof.jpeg"),
+      key: '1',
+      photo: require('../assets/prof.jpeg'),
 
-      subtitle: "@umery",
-      icon: require("../assets/heart.png"),
-      desc: "Im still not sure what you mean by . Can you please provide more context or clarify your question?",
+      subtitle: '@umery',
+      icon: require('../assets/heart.png'),
+      desc: 'Im still not sure what you mean by . Can you please provide more context or clarify your question?',
     },
   ];
-
-  // async function fetchUserData(id) {
-  //   const res = await getUserInformation(id).then(res => {
-  //      console.log(res.data);
-  //     return res;
-  //   });
-  // }
-  // const [data, setData]  = useState([])
-
-  // useEffect(()=>{
-  //   fetchUserData()
-  // }, [])
-
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {ProfData.map((element) => {
+        {ProfData.map((element, index) => {
           return (
-            <View style={styles.data}>
+            <View style={styles.data} key={index}>
               <Image style={styles.dataImage} source={element.photo} />
               <Text
                 style={{
-                  textAlign: "center",
-                  fontWeight: "bold",
+                  textAlign: 'center',
+                  fontWeight: 'bold',
                   fontSize: 30,
-                }}
-              >
+                }}>
                 {userData?.first_name}
               </Text>
-              <Text style={{ textAlign: "center", fontWeight: "200" }}>
+              <Text style={{textAlign: 'center', fontWeight: '200'}}>
                 {userData?.last_name}
               </Text>
               <View style={styles.iconContainer}>
                 <Image style={styles.icon} source={element.icon} />
-                <Text style={{ marginLeft: 2, fontSize: 18 }}>25</Text>
+                <Text style={{marginLeft: 2, fontSize: 18}}>25</Text>
               </View>
-              <View style={{ width: "90%" }}>
-                <Text style={{ fontWeight: "200", marginTop: 5 }}>
+              <View style={{width: '90%'}}>
+                <Text style={{fontWeight: '200', marginTop: 5}}>
                   {element.desc}
                 </Text>
               </View>
@@ -67,38 +50,34 @@ function UserProfile({ navigation }) {
       </View>
       <View style={styles.followerFollowingList}>
         <View style={styles.recent}>
-          <Text style={{ fontSize: 15, textAlign: "center", color: "#52a0c6" }}>
+          <Text style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
             0
           </Text>
-          <Text style={{ fontSize: 13, textAlign: "center", color: "#52a0c6" }}>
+          <Text style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
             RECENT
           </Text>
         </View>
-        <View style={styles.followers} style={{ marginLeft: 10 }}>
+        <View style={styles.followers} style={{marginLeft: 10}}>
           <Text
-            onPress={() => navigation.navigate("FollowersScreen")}
-            style={{ fontSize: 15, textAlign: "center", color: "#52a0c6" }}
-          >
+            onPress={() => navigation.navigate('FollowersScreen')}
+            style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
             500
           </Text>
           <Text
-            onPress={() => navigation.navigate("FollowersScreen")}
-            style={{ fontSize: 13, textAlign: "center", color: "#52a0c6" }}
-          >
+            onPress={() => navigation.navigate('FollowersScreen')}
+            style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
             FoLLOWERS
           </Text>
         </View>
         <View style={styles.following}>
           <Text
-            onPress={() => navigation.navigate("FollowingScreen")}
-            style={{ fontSize: 15, textAlign: "center", color: "#52a0c6" }}
-          >
+            onPress={() => navigation.navigate('FollowingScreen')}
+            style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
             1000
           </Text>
           <Text
-            onPress={() => navigation.navigate("FollowingScreen")}
-            style={{ fontSize: 13, textAlign: "center", color: "#52a0c6" }}
-          >
+            onPress={() => navigation.navigate('FollowingScreen')}
+            style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
             FOLLOWING
           </Text>
         </View>
@@ -106,7 +85,7 @@ function UserProfile({ navigation }) {
       <View style={styles.recentStreams}></View>
       <View style={styles.buttonContainer}>
         <Pressable style={styles.button}>
-          <Text style={{ color: "#52a0c6", fontSize: 20 }}>Follow</Text>
+          <Text style={{color: '#52a0c6', fontSize: 20}}>Follow</Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -115,17 +94,17 @@ function UserProfile({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
     // textAlign: "center",
 
     // margin: 100,
   },
   data: {
     marginTop: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dataImage: {
     height: 150,
@@ -138,16 +117,16 @@ const styles = StyleSheet.create({
     height: 20,
   },
   iconContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 10,
   },
   followerFollowingList: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     margin: 20,
   },
   recentStreams: {
@@ -159,13 +138,13 @@ const styles = StyleSheet.create({
     height: 45,
     // marginLeft: 1000,
     // backgroundColor : "#52a0c6",
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
     marginTop: 25,
-    marginLeft: "15%",
+    marginLeft: '15%',
     borderRadius: 40,
-    borderColor: "#52a0c6",
+    borderColor: '#52a0c6',
     borderWidth: 1,
   },
   button: {

@@ -112,7 +112,7 @@ const ProfileScreen = ({navigation}) => {
           alignItems: 'center',
         }}>
         <Text style={styles.text}>Available hearts:</Text>
-        <Text style={{fontSize: 18}}>{userData?.hearts}</Text>
+        <Text style={{fontSize: 18, color: 'black'}}>{userData?.hearts}</Text>
       </View>
       <Pressable
         style={{

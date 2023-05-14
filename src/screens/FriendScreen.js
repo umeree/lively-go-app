@@ -71,6 +71,7 @@ const FriendScreen = () => {
             returnKeyType="done"
             style={styles.input}
             placeholder="Search"
+            placeholderTextColor="black"
             onChangeText={newSearchTerm => setSearchTerm(newSearchTerm)}
             value={searchTerm}
           />
@@ -99,17 +100,7 @@ const FriendScreen = () => {
         )}
         {searchResult == null && loading == false ? (
           <View style={{marginTop: 50}}>
-            {/* <Text
-              style={{
-                fontSize: 22,
-                color: 'black',
-                textAlign: 'center',
-                opacity: 0.5,
-              }}>
-              Nothing to show, kindly search something! plzz
-            </Text> */}
-
-            <Text>{data}</Text>
+            <Text style={{color: 'black'}}>{data}</Text>
           </View>
         ) : (
           <ScrollView
@@ -118,7 +109,7 @@ const FriendScreen = () => {
               paddingHorizontal: 20,
             }}>
             <View style={{marginBottom: 10}}>
-              <Text style={{fontSize: 16}}>Search Results</Text>
+              <Text style={{fontSize: 16, color: 'black'}}>Search Results</Text>
             </View>
             {searchResult?.map((user, index) => {
               return (
@@ -137,7 +128,8 @@ const FriendScreen = () => {
                       <Text style={styles.text}>
                         {user.first_name} {user.last_name}
                       </Text>
-                      <Text style={{opacity: 0.8, fontSize: 16}}>
+                      <Text
+                        style={{opacity: 0.8, fontSize: 16, color: 'black'}}>
                         @{user.user_name}
                       </Text>
                     </View>

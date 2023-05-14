@@ -14,15 +14,6 @@ function Following({navigation}) {
     <>
       <ScreenHeader navigation={navigation} title="Followings" />
       <SafeAreaView>
-        <View style={styles.container}>
-          <View
-            style={{
-              width: '100%',
-              height: 2,
-              marginTop: 20,
-              backgroundColor: '#e3e1e3',
-            }}></View>
-        </View>
         <ScrollView style={{flexGrow: 1}}>
           <View style={styles.followersList}>
             {followings.length == 0 ? (
@@ -33,7 +24,9 @@ function Following({navigation}) {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontSize: 22}}>No Followings!</Text>
+                <Text style={{fontSize: 22, color: 'black'}}>
+                  No Followings!
+                </Text>
               </View>
             ) : (
               <></>
@@ -102,6 +95,7 @@ const styles = StyleSheet.create({
   dataText: {
     fontSize: 20,
     marginLeft: 10,
+    color: 'black',
     // paddingRight: 25,
   },
 });

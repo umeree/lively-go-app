@@ -43,13 +43,13 @@ export const PeopleMayKnow = ({navigation}) => {
                         textAlign: 'center',
                         fontWeight: '900',
                         fontSize: 20,
+                        color: 'black',
                       }}
-                      // onPress={() => navigation.navigate('UserProfileScreen')}
-                    >
+                      onPress={() => navigation.navigate('UserProfileScreen')}>
                       {element.first_name.toUpperCase()}{' '}
                       {element.last_name.toUpperCase()}
                     </Text>
-                    <Text style={{textAlign: 'center'}}>
+                    <Text style={{textAlign: 'center', color: 'black'}}>
                       {element.user.user_name}
                     </Text>
                     <View style={{marginTop: 10}}>
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   textOfMiddle: {
     fontSize: 18,
+    color: 'black',
   },
 
   //Lower Container Styling starts from here

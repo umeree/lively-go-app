@@ -150,7 +150,7 @@ function PaymentScreen(props) {
         }}
         cardStyle={{
           backgroundColor: '#FFFFFF',
-          textColor: '#000000',
+          textColor: 'black',
         }}
         style={{
           width: '100%',
@@ -158,6 +158,7 @@ function PaymentScreen(props) {
           marginVertical: 30,
           borderColor: theme.colors.primary,
           borderWidth: 2,
+          color: 'black',
         }}
         onCardChange={cardDetails => {
           console.log('cardDetails', cardDetails);
