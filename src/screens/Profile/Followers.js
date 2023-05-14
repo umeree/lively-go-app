@@ -7,6 +7,7 @@ import {theme} from '../../Theme/Theme';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {useUserDataHandler} from '../../../context/UserInfoContext';
 import ScreenHeader from '../../components/Header/ScreenHeader';
+import FollowBtn from '../../components/FollowBtn';
 
 function Followers({navigation}) {
   //** Global Context */
@@ -47,7 +48,7 @@ function Followers({navigation}) {
                     </View>
                     <FollowBtn
                       friendsId={element.follower.id}
-                      userName={element.follower.id}
+                      userName={element.follower.user_name}
                     />
                   </View>
                   <View

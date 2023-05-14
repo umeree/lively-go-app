@@ -20,6 +20,7 @@ export default function FollowBtn({friendsId, userName}) {
         text2: `You can not follow yourself!`,
       });
     } else {
+      setLoading(true);
       await followUser(userData.user_id, friendsId).then(res => {
         if (!res.error) {
           if (res.data) {
@@ -28,6 +29,7 @@ export default function FollowBtn({friendsId, userName}) {
               text1: 'Following',
               text2: `${userName} sucessfully added to your followings!`,
             });
+            setLoading(false);
             fetchUserData(userData.user_id);
           } else {
             Toast.show({
@@ -35,6 +37,7 @@ export default function FollowBtn({friendsId, userName}) {
               text1: 'Following',
               text2: `You already follow ${userName} `,
             });
+            setLoading(false);
           }
         } else {
           Toast.show({
@@ -42,6 +45,7 @@ export default function FollowBtn({friendsId, userName}) {
             text1: 'Following',
             text2: `${userName} failed to add to your followings!`,
           });
+          setLoading(false);
         }
       });
     }
@@ -49,8 +53,8 @@ export default function FollowBtn({friendsId, userName}) {
   return (
     <Pressable
       style={{
-        paddingHorizontal: 15,
-        paddingVertical: 10,
+        height: 40,
+        width: 80,
         backgroundColor: theme.colors.secondary,
         borderRadius: 5,
         display: 'flex',
@@ -59,7 +63,7 @@ export default function FollowBtn({friendsId, userName}) {
       }}
       onPress={() => handleAddFriend()}>
       {loading ? (
-        <ActivityIndicator size="small" color={theme.colors.secondary} />
+        <ActivityIndicator size="small" color="white" />
       ) : (
         <Text style={{color: 'white', fontSize: 16}}>Follow</Text>
       )}
