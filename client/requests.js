@@ -135,10 +135,10 @@ export async function followUser(userId, followersId) {
     url: `${API_URL}/api/v1/follow_user?userId=${userId}&followersId=${followersId}`,
   };
 
-  return axios(config)
+  return await axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      return response.data;
+      return response;
     })
     .catch(function (error) {
       console.log(error);
@@ -198,7 +198,6 @@ export async function GetAllStreams() {
       return {error: error.data};
     });
 }
-
 
 export async function GetAllUsers() {
   var config = {

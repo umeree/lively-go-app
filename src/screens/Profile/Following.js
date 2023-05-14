@@ -49,7 +49,7 @@ function Following({navigation}) {
                         source={require('../../assets/prof.jpeg')}
                       />
                       <Text style={styles.dataText}>
-                        {element.user.user_name}
+                        {element.following.user_name}
                       </Text>
                     </View>
                   </View>

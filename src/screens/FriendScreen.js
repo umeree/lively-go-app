@@ -16,6 +16,7 @@ import {ActivityIndicator} from 'react-native-paper';
 import {followUser, serachUsers} from '../../client/requests';
 import {useUserDataHandler} from '../../context/UserInfoContext';
 import Toast from 'react-native-toast-message';
+import FollowBtn from '../components/FollowBtn';
 
 const FriendScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,38 +39,6 @@ const FriendScreen = () => {
         setLoading(false);
       }
     });
-  }
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/api/v1/all_users/data`);
-  //     const jsonData = await response.json();
-  //     setData(jsonData);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-  // fetchData();
-
-  function handleAddFriend(friendsId, user_name) {
-    if (userData.user_id == friendsId) {
-      Toast.show({
-        type: 'error',
-        text1: 'Following',
-        text2: `You can not follow yourself!`,
-      });
-    } else {
-      followUser(userData.user_id, friendsId).then(res => {
-        if (!res.error) {
-          Toast.show({
-            type: 'success',
-            text1: 'Following',
-            text2: `${user_name} sucessfully added to your followings!`,
-          });
-          fetchUserData(userData.user_id);
-        }
-      });
-    }
   }
 
   return (
@@ -173,17 +142,10 @@ const FriendScreen = () => {
                       </Text>
                     </View>
                   </View>
-                  <Pressable
-                    style={{
-                      padding: 8,
-                      backgroundColor: theme.colors.secondary,
-                      borderRadius: 5,
-                    }}
-                    onPress={() =>
-                      handleAddFriend(user.user_id, user.user_name)
-                    }>
-                    <Text style={{color: 'white'}}>Follow</Text>
-                  </Pressable>
+                  <FollowBtn
+                    friendsId={user.user_id}
+                    userName={user.user_name}
+                  />
                 </View>
               );
             })}

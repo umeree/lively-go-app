@@ -42,18 +42,13 @@ function Followers({navigation}) {
                         source={require('../../assets/prof.jpeg')}
                       />
                       <Text style={styles.dataText}>
-                        {element.user.user_name}
+                        {element.follower.user_name}
                       </Text>
                     </View>
-                    <Pressable
-                      style={{
-                        justifyContent: 'center',
-                        padding: 12,
-                        backgroundColor: theme.colors.secondary,
-                        borderRadius: 10,
-                      }}>
-                      <Text>Follow</Text>
-                    </Pressable>
+                    <FollowBtn
+                      friendsId={element.follower.id}
+                      userName={element.follower.id}
+                    />
                   </View>
                   <View
                     style={{
