@@ -9,8 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Button from '../components/Button';
-import {API_URL} from '../../API_URL';
 import {theme} from '../Theme/Theme';
 import {ActivityIndicator} from 'react-native-paper';
 import {followUser, serachUsers} from '../../client/requests';
@@ -89,15 +87,6 @@ const FriendScreen = () => {
       </View>
       <View style={{marginTop: 15, width: '100%'}}>
         {/* Friend list section */}
-        {loading ? (
-          <ActivityIndicator
-            size="large"
-            color={theme.colors.secondary}
-            style={{marginTop: '25%'}}
-          />
-        ) : (
-          ''
-        )}
         {searchResult == null && loading == false ? (
           <View style={{marginTop: 50}}>
             <Text style={{color: 'black'}}>{data}</Text>
@@ -142,6 +131,16 @@ const FriendScreen = () => {
               );
             })}
           </ScrollView>
+        )}
+        {/* loader */}
+        {loading ? (
+          <ActivityIndicator
+            size="large"
+            color={theme.colors.secondary}
+            style={{marginTop: '25%'}}
+          />
+        ) : (
+          ''
         )}
       </View>
     </View>

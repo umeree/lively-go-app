@@ -249,3 +249,21 @@ export async function sendHearts(userId, ownerId, hearts) {
       return {error: error};
     });
 }
+
+//UserInformations
+
+export async function getEndUserInformation(id) {
+  return await fetch(`${API_URL}/api/v1/get_enduser_information?id=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(async res => {
+    const jsonRes = await res.json();
+    if (res.status !== 200) {
+      return {error: jsonRes.status};
+    } else if (res.status == 200) {
+      return {data: jsonRes};
+    }
+  });
+}

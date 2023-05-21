@@ -1,92 +1,127 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useUserDataHandler} from '../../context/UserInfoContext';
 import {getUserInformation} from '../client/requests';
+import {getEndUserInformation} from '../../client/requests';
+import FollowBtn from '../components/FollowBtn';
 
-function UserProfile({navigation}) {
+function UserProfile({navigation, route}) {
+  const [user, setUser] = useState(null);
   const {userData} = useUserDataHandler();
-  const ProfData = [
-    {
-      key: '1',
-      photo: require('../assets/prof.jpeg'),
+  const {userId} = route.params;
 
-      subtitle: '@umery',
-      icon: require('../assets/heart.png'),
-      desc: 'Im still not sure what you mean by . Can you please provide more context or clarify your question?',
-    },
-  ];
+  async function handleFetching() {
+    const res = await getEndUserInformation(userId);
+    if (!res.error) {
+      console.log(res.data.user);
+      setUser(res.data.user);
+    } else {
+      setUser(null);
+    }
+  }
+
+  useEffect(() => {
+    handleFetching();
+  }, []);
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {ProfData.map((element, index) => {
-          return (
-            <View style={styles.data} key={index}>
-              <Image style={styles.dataImage} source={element.photo} />
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  fontSize: 30,
-                }}>
-                {userData?.first_name}
-              </Text>
-              <Text style={{textAlign: 'center', fontWeight: '200'}}>
-                {userData?.last_name}
-              </Text>
-              <View style={styles.iconContainer}>
-                <Image style={styles.icon} source={element.icon} />
-                <Text style={{marginLeft: 2, fontSize: 18}}>25</Text>
-              </View>
-              <View style={{width: '90%'}}>
-                <Text style={{fontWeight: '200', marginTop: 5}}>
-                  {element.desc}
-                </Text>
-              </View>
-            </View>
-          );
-        })}
+        <View style={styles.data}>
+          <Image
+            style={styles.dataImage}
+            source={require('../assets/prof.jpeg')}
+          />
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              fontSize: 30,
+              color: 'black',
+            }}>
+            {user?.profile.first_name} {user?.profile.last_name}
+          </Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 24,
+              opacity: 0.5,
+              fontWeight: '500',
+              color: 'black',
+            }}>
+            {user?.user_name}
+          </Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: 10,
+            }}>
+            <Image
+              style={styles.icon}
+              source={require('../assets/heart.png')}
+            />
+            <Text style={{marginLeft: 2, fontSize: 25}}>{user?.hearts}</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.followerFollowingList}>
-        <View style={styles.recent}>
-          <Text style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
-            0
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingHorizontal: 30,
+          paddingVertical: 20,
+        }}>
+        <Pressable
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 32, fontWeight: '900', color: 'black'}}>
+            {user?._count.following}
           </Text>
-          <Text style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
-            RECENT
+          <Text style={{color: 'black', fontSize: 18}}>Followings</Text>
+        </Pressable>
+        <View style={{width: 2, height: 50, backgroundColor: 'gray'}}></View>
+        <Pressable
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 32, fontWeight: '900', color: 'black'}}>
+            {user?._count.followers}
           </Text>
-        </View>
-        <View style={styles.followers} style={{marginLeft: 10}}>
-          <Text
-            onPress={() => navigation.navigate('FollowersScreen')}
-            style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
-            500
+          <Text style={{color: 'black', fontSize: 18}}>Followers</Text>
+        </Pressable>
+        <View style={{width: 2, height: 50, backgroundColor: 'gray'}}></View>
+        <Pressable
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 32, fontWeight: '900', color: 'black'}}>
+            {user?._count.Stream}
           </Text>
-          <Text
-            onPress={() => navigation.navigate('FollowersScreen')}
-            style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
-            FoLLOWERS
-          </Text>
-        </View>
-        <View style={styles.following}>
-          <Text
-            onPress={() => navigation.navigate('FollowingScreen')}
-            style={{fontSize: 15, textAlign: 'center', color: '#52a0c6'}}>
-            1000
-          </Text>
-          <Text
-            onPress={() => navigation.navigate('FollowingScreen')}
-            style={{fontSize: 13, textAlign: 'center', color: '#52a0c6'}}>
-            FOLLOWING
-          </Text>
-        </View>
+          <Text style={{color: 'black', fontSize: 18}}>Streams</Text>
+        </Pressable>
       </View>
       <View style={styles.recentStreams}></View>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
-          <Text style={{color: '#52a0c6', fontSize: 20}}>Follow</Text>
-        </Pressable>
+        <FollowBtn
+          friendsId={user?.id}
+          userName={user?.user_name}
+          type="full"
+        />
       </View>
     </SafeAreaView>
   );
@@ -97,9 +132,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    // textAlign: "center",
-
-    // margin: 100,
   },
   data: {
     marginTop: 40,
@@ -110,18 +142,10 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     borderRadius: 75,
-    // justifyContent: "center",
   },
   icon: {
     width: 20,
     height: 20,
-  },
-  iconContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
   },
   followerFollowingList: {
     display: 'flex',
@@ -131,21 +155,15 @@ const styles = StyleSheet.create({
   },
   recentStreams: {
     height: 250,
-    // backgroundColor: "#52a0c6",
   },
   buttonContainer: {
     width: 280,
     height: 45,
-    // marginLeft: 1000,
-    // backgroundColor : "#52a0c6",
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
     marginTop: 25,
     marginLeft: '15%',
-    borderRadius: 40,
-    borderColor: '#52a0c6',
-    borderWidth: 1,
   },
   button: {
     borderRadius: 40,

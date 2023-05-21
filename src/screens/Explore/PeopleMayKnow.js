@@ -45,7 +45,11 @@ export const PeopleMayKnow = ({navigation}) => {
                         fontSize: 20,
                         color: 'black',
                       }}
-                      onPress={() => navigation.navigate('UserProfileScreen')}>
+                      onPress={() =>
+                        navigation.navigate('UserProfileScreen', {
+                          userId: element.id,
+                        })
+                      }>
                       {element.first_name.toUpperCase()}{' '}
                       {element.last_name.toUpperCase()}
                     </Text>
