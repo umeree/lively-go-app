@@ -10,10 +10,10 @@ const Tab = createMaterialTopTabNavigator();
 export const ExploreFriends = ({navigation}) => {
   return (
     <>
-      <DashHeader />
+      <DashHeader navigation={navigation} />
       <Tab.Navigator>
         <Tab.Screen name="Streams" component={RecentFriends} />
-        <Tab.Screen name="You May Know" component={PeopleMayKnow} />
+        <Tab.Screen name="Friends" component={PeopleMayKnow} />
       </Tab.Navigator>
     </>
   );

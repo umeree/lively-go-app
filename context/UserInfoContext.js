@@ -20,7 +20,6 @@ export const UserDataContextProvider = ({children}) => {
 
   async function fetchUserData(id) {
     const res = await getUserInformation(id).then(res => {
-      // console.log(res.data);
       setUserData(res.data.user);
       setFollowers(res.data.followers);
       setFollowings(res.data.followings);

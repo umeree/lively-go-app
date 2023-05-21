@@ -9,7 +9,7 @@ import MatIcon from 'react-native-vector-icons/MaterialIcons';
 export default function Dashboard({navigation}) {
   return (
     <>
-      <DashHeader />
+      <DashHeader navigation={navigation} />
       <SafeAreaView>
         <View
           style={styles.mainModules}
@@ -17,7 +17,7 @@ export default function Dashboard({navigation}) {
           <TouchableOpacity
             style={styles.screens}
             onPress={() => navigation.navigate('AllStreamsScreen')}>
-            <Text style={styles.text}>Recents Live Streams</Text>
+            <Text style={styles.text}>All Live Streams</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('FollowersScreen')}

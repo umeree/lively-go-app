@@ -13,6 +13,7 @@ export default function StreamContainer({navigation}) {
   const {userData} = useUserDataHandler();
 
   function handleJoinStream(element) {
+    console.log('Clicked');
     navigation.navigate('HostStreamScreen', {
       name: element.name,
       streamId: element.id,
@@ -38,47 +39,46 @@ export default function StreamContainer({navigation}) {
         <ScrollView style={styles.upperContainer}>
           {users.map((element, index) => {
             return (
-              <View
-                style={styles.innerContentofUpperContainer}
-                onPress={() => handleJoinStream(element)}
-                key={index}>
-                <View
-                  style={{
-                    height: 100,
-                    width: 100,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#3BA55D',
-                    borderRadius: 10,
-                  }}>
-                  <MaterialCommunityIcons name="broadcast" size={26} />
-                </View>
-                <View style={styles.textContainer}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      color: 'black',
-                    }}>
-                    {element.name}
-                  </Text>
-                  <Text style={{color: 'black'}}>{element.description}</Text>
+              <Pressable onPress={() => handleJoinStream(element)} key={index}>
+                <View style={styles.innerContentofUpperContainer}>
                   <View
                     style={{
-                      backgroundColor: 'rgba(255,0,0,0.15)',
-                      padding: 2,
-                      borderRadius: 50,
-                      width: 50,
+                      height: 100,
+                      width: 100,
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      marginTop: 20,
+                      backgroundColor: '#3BA55D',
+                      borderRadius: 10,
                     }}>
-                    <Text style={{color: 'red'}}>{element.status}</Text>
+                    <MaterialCommunityIcons name="broadcast" size={26} />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                        color: 'black',
+                      }}>
+                      {element.name}
+                    </Text>
+                    <Text style={{color: 'black'}}>{element.description}</Text>
+                    <View
+                      style={{
+                        backgroundColor: 'rgba(255,0,0,0.15)',
+                        padding: 2,
+                        borderRadius: 50,
+                        width: 50,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 20,
+                      }}>
+                      <Text style={{color: 'red'}}>{element.status}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
+              </Pressable>
             );
           })}
         </ScrollView>

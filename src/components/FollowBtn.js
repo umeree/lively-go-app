@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Pressable} from 'react-native';
 import {followUser} from '../../client/requests';
 import {useUserDataHandler} from '../../context/UserInfoContext';
@@ -8,10 +8,11 @@ import {theme} from '../Theme/Theme';
 import {Text} from 'react-native';
 
 export default function FollowBtn({friendsId, userName}) {
+  const [isAddEligible, setIsAddEligible] = useState(null);
   //** states */
   const [loading, setLoading] = useState(false);
   // ** global user state
-  const {userData, fetchUserData} = useUserDataHandler();
+  const {userData, fetchUserData, followings} = useUserDataHandler();
   async function handleAddFriend() {
     if (userData.user_id == friendsId) {
       Toast.show({
@@ -50,23 +51,41 @@ export default function FollowBtn({friendsId, userName}) {
       });
     }
   }
+
+  //* Checking eligibility
+  useEffect(() => {
+    const eligibility = followings.find(
+      following => following.following.id == friendsId,
+    );
+    if (eligibility) {
+      setIsAddEligible(false);
+    } else {
+      setIsAddEligible(true);
+    }
+  }, []);
   return (
-    <Pressable
-      style={{
-        height: 40,
-        width: 80,
-        backgroundColor: theme.colors.secondary,
-        borderRadius: 5,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      onPress={() => handleAddFriend()}>
-      {loading ? (
-        <ActivityIndicator size="small" color="white" />
+    <>
+      {isAddEligible ? (
+        <Pressable
+          style={{
+            height: 40,
+            width: 80,
+            backgroundColor: theme.colors.secondary,
+            borderRadius: 5,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => handleAddFriend()}>
+          {loading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <Text style={{color: 'white', fontSize: 16}}>Follow</Text>
+          )}
+        </Pressable>
       ) : (
-        <Text style={{color: 'white', fontSize: 16}}>Follow</Text>
+        <></>
       )}
-    </Pressable>
+    </>
   );
 }

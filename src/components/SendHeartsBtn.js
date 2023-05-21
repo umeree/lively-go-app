@@ -45,9 +45,16 @@ export default function SendHeartsBtn({ownerId}) {
       });
     }
   }
+  console.log(
+    '----------------------------------->',
+    ownerId,
+    userData.user_id,
+  );
   return (
     <>
-      {sendModel ? (
+      {ownerId == userData.user_id ? (
+        <></>
+      ) : sendModel ? (
         <Modal
           animationType="slide"
           statusBarTranslucent={true}
@@ -91,7 +98,9 @@ export default function SendHeartsBtn({ownerId}) {
                 alignItems: 'center',
               }}
               onPress={() => handleSendHearts(50)}>
-              <Text style={{fontSize: 16}}>❤️ Send 50 Hearts</Text>
+              <Text style={{fontSize: 16, color: theme.colors.primary}}>
+                ❤️ Send 50 Hearts
+              </Text>
             </Pressable>
             <Pressable
               style={{
@@ -108,7 +117,9 @@ export default function SendHeartsBtn({ownerId}) {
                 alignItems: 'center',
               }}
               onPress={() => handleSendHearts(100)}>
-              <Text style={{fontSize: 16}}>❤️ Send 100 Hearts</Text>
+              <Text style={{fontSize: 16, color: theme.colors.primary}}>
+                ❤️ Send 100 Hearts
+              </Text>
             </Pressable>
             <Pressable
               style={{
@@ -126,18 +137,24 @@ export default function SendHeartsBtn({ownerId}) {
               }}
               onPress={() => handleSendHearts(500)}
               s>
-              <Text style={{fontSize: 16}}>❤️ Send 500 Hearts</Text>
+              <Text style={{fontSize: 16, color: theme.colors.primary}}>
+                ❤️ Send 500 Hearts
+              </Text>
             </Pressable>
           </View>
         </Modal>
       ) : (
         <></>
       )}
-      <Pressable
-        onPress={() => setSendModel(true)}
-        style={{padding: 10, borderRadius: 50, backgroundColor: 'white'}}>
-        <Text style={{fontSize: 20}}>❤️</Text>
-      </Pressable>
+      {ownerId == userData.user_id ? (
+        <></>
+      ) : (
+        <Pressable
+          onPress={() => setSendModel(true)}
+          style={{padding: 10, borderRadius: 50, backgroundColor: 'white'}}>
+          <Text style={{fontSize: 20}}>❤️</Text>
+        </Pressable>
+      )}
     </>
   );
 }

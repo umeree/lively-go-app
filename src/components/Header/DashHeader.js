@@ -1,21 +1,23 @@
 import React, {createContext, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {Image} from 'react-native';
 import {useUserDataHandler} from '../../../context/UserInfoContext';
 import {theme} from '../../Theme/Theme';
 
-function DashHeader() {
+function DashHeader({navigation}) {
   const {userData} = useUserDataHandler();
   return (
     <View style={styles.containerHeader}>
       <Text style={{fontSize: 28, color: 'white'}}>Lively Go</Text>
-      <View style={styles.userInfo}>
+      <Pressable
+        style={styles.userInfo}
+        onPress={() => navigation.navigate('UserProfileScreen')}>
         <Image
           style={styles.infoImage}
           source={require('../../assets/prof.jpeg')}
         />
         <Text style={styles.infoText}>{userData?.first_name}</Text>
-      </View>
+      </Pressable>
     </View>
   );
 }
