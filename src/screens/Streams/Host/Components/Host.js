@@ -6,9 +6,19 @@ import ZegoUIKitPrebuiltLiveStreaming, {
 } from '@zegocloud/zego-uikit-prebuilt-live-streaming-rn';
 import {UpdateStream} from '../../../../../client/requests';
 import Toast from 'react-native-toast-message';
+import * as ZIM from 'zego-zim-react-native';
 
-export default function HostPage({APP_ID, APP_SIGNIN, USER_ID, USERNAME, LIVE_ID,OWNER_ID, STREAM_ID, navigation}) {
-  console.log("Meta data:", APP_ID, APP_SIGNIN, USER_ID, USERNAME, LIVE_ID)
+export default function HostPage({
+  APP_ID,
+  APP_SIGNIN,
+  USER_ID,
+  USERNAME,
+  LIVE_ID,
+  OWNER_ID,
+  STREAM_ID,
+  navigation,
+}) {
+  console.log('Meta data:', APP_ID, APP_SIGNIN, USER_ID, USERNAME, LIVE_ID);
   return (
     <View style={{height: '100%', width: '100%'}}>
       <ZegoUIKitPrebuiltLiveStreaming
@@ -43,6 +53,7 @@ export default function HostPage({APP_ID, APP_SIGNIN, USER_ID, USERNAME, LIVE_ID
             navigation.navigate('Tabs');
           },
         }}
+        plugins={[ZIM]}
       />
     </View>
   );

@@ -41,7 +41,8 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",
     "uuid": "^9.0.0",
-    "zego-express-engine-reactnative": "^3.2.0"
+    "zego-express-engine-reactnative": "^3.2.0",
+    "zego-zim-react-native": "^2.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
