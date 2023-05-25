@@ -10,7 +10,29 @@ export default function Dashboard({navigation}) {
   return (
     <>
       <DashHeader navigation={navigation} />
-      <SafeAreaView>
+      <View
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            backgroundColor: theme.colors.secondary,
+            width: 200,
+            height: 40,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderBottomEndRadius: 20,
+            borderBottomStartRadius: 20,
+          }}>
+          <Text style={{fontSize: 18, color: 'white', fontWeight: 500}}>
+            Dashboard
+          </Text>
+        </View>
+      </View>
+      <SafeAreaView style={{marginTop: -40}}>
         <View
           style={styles.mainModules}
           onPress={() => navigation.navigate('FindFriendScreen')}>
@@ -19,16 +41,18 @@ export default function Dashboard({navigation}) {
             onPress={() => navigation.navigate('AllStreamsScreen')}>
             <Text style={styles.text}>All Live Streams</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('FollowersScreen')}
-            style={styles.screens}>
-            <Text style={styles.text}>Followers List</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('FollowingScreen')}
-            style={styles.screens}>
-            <Text style={styles.text}>Following List</Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('FollowersScreen')}
+              style={styles.screens}>
+              <Text style={styles.text}>Followers List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('FollowingScreen')}
+              style={styles.screens}>
+              <Text style={styles.text}>Following List</Text>
+            </TouchableOpacity>
+          </View>
           {/* <TouchableOpacity style={styles.screens}>
             <Text style={styles.text}>Stats</Text>
           </TouchableOpacity> */}
@@ -43,7 +67,7 @@ export default function Dashboard({navigation}) {
           padding: 15,
           bottom: 5,
           right: 10,
-          backgroundColor: theme.colors.secondary,
+          backgroundColor: theme.colors.intermediate,
           borderRadius: 50,
         }}
         onPress={() => navigation.navigate('InitialPublishStreamScreen')}>
@@ -68,19 +92,21 @@ const styles = StyleSheet.create({
     fontSize: 19,
   },
   mainModules: {
+    display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '25%',
   },
   screens: {
-    backgroundColor: theme.colors.primary,
-    width: 300,
+    backgroundColor: theme.colors.secondary,
+    height: 180,
+    width: 180,
     marginBottom: 20,
-    height: 100,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 1000,
   },
   btnLive: {
     backgroundColor: theme.colors.secondary,

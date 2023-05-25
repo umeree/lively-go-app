@@ -9,9 +9,7 @@ function DashHeader({navigation}) {
   return (
     <View style={styles.containerHeader}>
       <Text style={{fontSize: 28, color: 'white'}}>Lively Go</Text>
-      <Pressable
-        style={styles.userInfo}
-        onPress={() => navigation.navigate('UserProfileScreen')}>
+      <Pressable style={styles.userInfo}>
         <Image
           style={styles.infoImage}
           source={require('../../assets/prof.jpeg')}

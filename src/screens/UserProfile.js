@@ -47,7 +47,7 @@ function UserProfile({navigation, route}) {
               textAlign: 'center',
               fontSize: 24,
               opacity: 0.5,
-              fontWeight: '500',
+              fontWeight: '300',
               color: 'black',
             }}>
             {user?.user_name}
@@ -63,8 +63,11 @@ function UserProfile({navigation, route}) {
             <Image
               style={styles.icon}
               source={require('../assets/heart.png')}
+              alt="heart picture"
             />
-            <Text style={{marginLeft: 2, fontSize: 25}}>{user?.hearts}</Text>
+            <Text style={{marginLeft: 2, fontSize: 25, color: 'black'}}>
+              {user?.hearts}
+            </Text>
           </View>
         </View>
       </View>
