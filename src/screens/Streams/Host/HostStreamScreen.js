@@ -5,11 +5,20 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import 'react-native-get-random-values';
 import FollowBtn from '../../../components/FollowBtn';
 import SendHeartsBtn from '../../../components/SendHeartsBtn';
+import ShareStream from '../../../components/Share';
 
 export default function HostStreamScreen({navigation, route}) {
   //** Fetch params from navigation */
-  const {name, streamId, status, userName, liveId, userId, ownerId} =
-    route.params;
+  const {
+    name,
+    streamId,
+    status,
+    userName,
+    liveId,
+    userId,
+    ownerId,
+    description,
+  } = route.params;
   const APP_ID = 1411343749;
   const APP_SIGNIN =
     'fc1d908191907fb381ccadb4527b721e4b3551dc2bb0b57fb2625bea313c7fb8';
@@ -24,6 +33,15 @@ export default function HostStreamScreen({navigation, route}) {
           <View
             style={{position: 'absolute', right: 10, top: 350, zIndex: 1000}}>
             <SendHeartsBtn ownerId={ownerId} />
+          </View>
+          <View
+            style={{position: 'absolute', right: 10, top: 350, zIndex: 1000}}>
+            <ShareStream
+              ownerId={ownerId}
+              name={name}
+              description={description}
+              username={userName}
+            />
           </View>
           <HostComponent
             navigation={navigation}

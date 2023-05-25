@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Alert} from 'react-native';
 import {theme} from '../../../Theme/Theme';
 import ScreenHeader from '../../../components/Header/ScreenHeader';
 import Header from '../../../components/Header';
@@ -58,7 +58,7 @@ export default function InitialPublishStream({navigation}) {
           if (!res.error) {
             showSuccessToast();
             navigation.navigate('HostStreamScreen', {
-              name: res.name,
+              name: res.channelName,
               streamId: res.streamId,
               status: res.status,
               userName: userName,

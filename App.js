@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import IconsA from 'react-native-vector-icons/AntDesign';
 import IconsFA from 'react-native-vector-icons/FontAwesome5';
 import {theme} from './src/Theme/Theme';
-import { API_URL } from './API_URL';
+import {API_URL} from './API_URL';
 import {
   StartScreen,
   LoginScreen,
@@ -83,9 +83,6 @@ const MyTabs = () => {
 const Stack = createStackNavigator();
 
 export default function App() {
-  fetch('http://192.168.10.7:4001/api/v1/all_users')
-   .then(res => console.log(res))
-   .then(data => console.log(data))
   return (
     <>
       <UserDataContextProvider>
