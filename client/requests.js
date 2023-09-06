@@ -128,7 +128,7 @@ export async function serachUsers(username) {
     });
 }
 
-//follow users
+//follow users requests
 export async function followUser(userId, followersId) {
   var config = {
     method: 'post',
@@ -146,7 +146,7 @@ export async function followUser(userId, followersId) {
     });
 }
 
-//create stream
+//create stream requests
 export async function CreateStream(name, description, liveId, userId) {
   var config = {
     method: 'post',
