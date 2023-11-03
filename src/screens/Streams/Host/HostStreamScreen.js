@@ -19,9 +19,9 @@ export default function HostStreamScreen({navigation, route}) {
     ownerId,
     description,
   } = route.params;
-  const APP_ID = 1300420611;
+  const APP_ID = 399249957;
   const APP_SIGNIN =
-    'cbff091b05aa37bebec5f59e88bfc6bc3e00244b481b9ee2b306ac974a73dfff';
+    'c4953289764a459f2859cc08d86e9cf75258f6f6d9ba5cdb22fcb7726f701638';
   const USER_ID = userId;
   const USERNAME = userName;
   const LIVE_ID = liveId;
